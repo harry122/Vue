@@ -1,0 +1,32 @@
+<template>
+<div>
+    <h3>Edit the User</h3>
+    <p>Locale: {{$route.query.locale}}</p>
+    <p>Date: {{ $route.query.date }}</p>
+    <button @click="confirmed= true">Confirm</button>
+    <div style="height: 700px">
+       <p id="data">Some extra data</p> 
+    </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            confirmed: false
+        }
+    },
+    beforeRouteLeave (to, from, next) {
+        if(this.confirmed) {
+            next()
+        } else { 
+            if(confirm('Are you Sure!')) {
+                next();
+            } else {
+                next(false)
+            }
+        }
+    }
+}
+</script>
